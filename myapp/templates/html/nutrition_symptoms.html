@@ -1,0 +1,52 @@
+<!-- nutrition_symptoms.html -->
+<!DOCTYPE html>
+{% load rating_filters %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>{{ symptom }}の栄養管理</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ symptom }}の栄養管理</h1>
+
+        <!-- 投稿された栄養管理情報の表示 -->
+        <section>
+            {% for post in nutrition_posts %}
+                <div class="post-container">
+                    <p>投稿者: {{ post.user.username }}</p>  <!-- ユーザー名の表示 -->
+                    <p>投稿日時: {{ post.created_at|date:"Y-m-d H:i" }}</p>  <!-- 日時の表示 -->
+                    <h3>{{ post.product_name }}</h3>
+                    <p>経緯: {{ post.description }}</p>
+                    {% if post.photo %}
+                    <img src="{{ post.photo.url }}" alt="{{ post.product_photo }}" style="max-width: 500px; max-height: 500px;">
+                    {% else %}
+                    <p>No image available.</p>
+                    {% endif %}
+                    <p>評価: 
+                        {% for star in "12345" %}
+                            {% if forloop.counter <= post.rating %}
+                                &#9733; <!-- Filled star icon -->
+                            {% else %}
+                                &#9734; <!-- Empty star icon -->
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <!-- Link to the detailed post page, etc. -->
+                </div>
+            {% empty %}
+                <p>{{ symptom }}に関連する投稿は見つかりませんでした。</p>
+            {% endfor %}
+        </section>
+        
+
+        <div class="nutrition-back-button">
+            <a href="{% url 'nutrition' %}" class="button">栄養管理画面に戻る</a>
+        </div>
+    </div>
+</body>
+</html>
+

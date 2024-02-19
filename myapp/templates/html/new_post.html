@@ -1,0 +1,35 @@
+<!-- myapp/templates/myapp/new_post.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規投稿</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script type="module" src="path/to/your/javascript/file.js"></script>
+    
+</head>
+<body>
+    <h1>新規ブログ投稿</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-field">
+            {{ form.title.label_tag }} {{ form.title }}
+        </div>
+        <div class="form-field">
+            {{ form.content.label_tag }} {{ form.content }}
+        </div>
+        <div class="form-field">
+            {{ form.image.label_tag }} {{ form.image }}
+        </div>
+        <button type="submit">投稿</button>
+    </form>
+
+    <div class="blog-button-container">
+        <a href="{% url 'blog' %}" class="button blog-button">戻る</a>
+    </div>  
+</body>
+</html>
+

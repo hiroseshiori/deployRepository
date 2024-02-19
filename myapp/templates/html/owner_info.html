@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script type="module" src="path/to/your/javascript/file.js"></script>
+
+</head>
+<body>
+
+<h2>飼い主情報</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">登録</button>
+
+</body>
+
+<div class="mypage-container">
+    <a href="{% url 'mypage' %}" class="button mypage-button">戻る</a>
+</div>
+
+</html>

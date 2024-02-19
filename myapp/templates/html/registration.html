@@ -1,0 +1,25 @@
+<!-- myapp/templates/html/registration.html -->
+<html>
+<head>
+    <title>ペットライフスペース</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script type="module" src="{% static 'js/your_script.js' %}"></script>
+</head>
+<body>
+    <div class="registration-container">
+        <h2>PetLifeSpase</h2>
+        <h2>素敵なペットとの生活を</h2>
+    
+        <!-- 新規登録ボタン -->
+        
+        <a href="{% url 'new_registration' %}" class="button new-registration-button">新規登録</a>
+        
+
+        <!-- ログインボタン -->
+        
+        <a href="{% url 'login' %}" class="button login-button">ログイン</a>
+    </div>
+
+</body>
+</html>

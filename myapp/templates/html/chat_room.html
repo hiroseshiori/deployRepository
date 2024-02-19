@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ room.name }} - チャットルーム</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="chat-app">
+        <div class="messages" id="chat-log">
+            {% for message in messages %}
+                <div class="{% if message.user == request.user %}message sent{% else %}message received{% endif %}">
+                    {% if message.user.profile.profile_image %}
+                        <img src="{{ message.user.profile.profile_image.url }}" alt="{{ message.user.username }}" class="message-icon">
+                    {% elif message.user.profile.icon %}
+                        <img src="{{ message.user.profile.icon.url }}" alt="{{ message.user.username }}" class="message-icon">
+                    {% else %}
+                        <img src="{% static 'images/default.jpg' %}" alt="Default Image" class="message-icon">
+                    {% endif %}
+                    <div class="message-content">
+                        <div class="message-body">{{ message.message }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            <form action="{% url 'send_chat_message' room.id %}" method="post" id="chat-message-form">
+                {% csrf_token %}
+                <input type="text" name="message" id="chat-message-input" placeholder="メッセージを入力" autocomplete="off" required>
+                <button type="submit" id="chat-message-submit">送信</button>
+            </form>
+        </div>
+        <div class="chat-button-container">
+            <a href="{% url 'chat' %}" class="button chat-button">戻る</a>
+        </div> 
+
+        <script>
+            // スクロールを最下部に移動する関数
+            function scrollToBottom() {
+                var messageContainer = document.getElementById("chat-log");
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }
+
+            // ページが読み込まれたら最下部にスクロール
+            document.addEventListener("DOMContentLoaded", scrollToBottom);
+
+            // メッセージ送信時にスクロールを最下部に移動
+            document.getElementById("chat-message-form").addEventListener("submit", function() {
+                setTimeout(scrollToBottom, 100); // メッセージがDOMに追加された後にスクロール
+            });
+        </script>
+        
+    </div>
+</body>
+</html>

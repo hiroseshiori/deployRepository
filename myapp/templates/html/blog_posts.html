@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ記事一覧</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>ブログ記事一覧</h1>
+    <div class="blog-post">
+        {% for post in posts %}
+            <div class="post">
+                <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+            </div>
+        {% empty %}
+            <p>現在投稿はありません。</p>
+        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if posts.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ posts.previous_page_number }}">previous</a>
+                {% endif %}
+                
+                <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                </span>
+                
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}">next</a>
+                    <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
+    </div>
+    <div class="blog-button-container">
+        <a href="{% url 'blog' %}" class="button blog-button">戻る</a>
+    </div>  
+</body>
+</html>

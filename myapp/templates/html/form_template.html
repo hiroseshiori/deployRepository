@@ -1,0 +1,26 @@
+<!-- form_template.html -->
+
+{% extends 'base.html' %} {# 必要に応じてベーステンプレートを拡張 #}
+
+{% load tempus_dominus %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Form Template</title>
+    {% css %}
+    {% js %}
+</head>
+<body>
+    <!-- Your form goes here -->
+    <form method="post" action="{% your_form_action %}">
+        {% csrf_token %}
+        {{ your_form }}
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- ... -->
+</body>
+</html>
+{% endblock %}

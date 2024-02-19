@@ -1,0 +1,49 @@
+<!-- nutrition_post.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>栄養管理情報の投稿</title>
+</head>
+<body>
+    <div class="container">
+        <h1>栄養管理情報の投稿</h1>
+        <form action="{% url 'nutrition_post_submit' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="symptom">症状:</label>
+                {{ form.symptom }}
+            </div>
+            <div class="form-group">
+                <label for="product_name">商品名:</label>
+                {{ form.product_name }}
+            </div>
+            <div class="form-group">
+                <label for="description">使用した経緯:</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label for="product_photo">商品の写真:</label>
+                {{ form.photo }}
+            </div>
+            <div class="form-group">
+                <label>評価:</label>
+                <div class="star-rating">
+                    {% for star_num in "12345" %}
+                    <input type="radio" id="star{{ star_num }}" name="rating" value="{{ star_num }}" />
+                    <label for="star{{ star_num }}" class="star">&#9733;</label>
+                    {% endfor %}
+                </div>
+            <button type="submit" class="button">投稿</button>
+        </form>
+    </div>
+
+    <div class="nutrition-back-button">
+        <a href="{% url 'nutrition' %}" class="button">栄養管理画面に戻る</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.pet_name }}の詳細</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>{{ post.pet_name }}の詳細</h1>
+    <p>種類: {{ post.pet_type }}</p>
+    <p>品種: {{ post.pet_breed }}</p>
+    <p>性別: {{ post.gender }}</p>
+    <p>誕生日: {{ post.birth_date|date:"Y年m月d日" }}</p>
+    <p>ワクチン接種有無: {{ post.vaccinated|yesno:"有,無" }}</p>
+    <p>不妊去勢手術有無: {{ post.neutered|yesno:"有,無" }}</p>
+    <p>住所: {{ post.address }}</p>
+    <p>募集理由: {{ post.reason }}</p>
+    {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="{{ post.pet_name }}" style="width: 200px;">
+    {% endif %}
+    <a href="{% url 'new_adoption' %}">新着里親情報に戻る</a>
+</body>
+</html>

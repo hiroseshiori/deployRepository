@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サポートチャットルーム</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="chat-app">
+        <div class="chat-section-container">
+            <div class="messages" id="messages"></div>
+            <div id="chat-message-form">
+                <input type="text" id="chat-message-input" placeholder="メッセージを入力してください">
+                <button id="send-button">送信</button>
+            </div>
+        </div>
+        <div class="chat-button-container">
+            <a href="{% url 'chat' %}" class="button chat-button">チャット画面へ戻る</a>
+        </div>     
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('messages');
+        const chatInput = document.getElementById('chat-message-input');
+        const sendButton = document.getElementById('send-button');
+        
+        // 仮のユーザーIDを設定
+        // 実際にはサーバーから取得する値を使用
+        const userId = "{{ user.id }}"; // Djangoテンプレートを仮定
+        const chatKey = 'chatMessages_' + userId;
+
+            // ローカルストレージからチャット履歴をロードする関数
+        function loadMessages() {
+            const savedMessages = localStorage.getItem(chatKey);
+            if (savedMessages) {
+                messagesContainer.innerHTML = savedMessages;
+            } else {
+            // 新規ユーザーまたはキーに対応するデータがない場合は初期メッセージを表示
+                displayInitialMessage();
+            }
+            scrollToBottom();
+        }
+
+
+        function displayInitialMessage() {
+            // 初期メッセージを表示する関数
+            // 新規ユーザーの場合、またはチャット履歴が空の場合に実行
+            if (messagesContainer.children.length === 0) {
+                displayMessage("お困りのことはありますか？", "received");
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', loadMessages);
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+   
+
+
+
+
+        
+
+        function displayMessage(text, type) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', type);
+            const messageContent = document.createElement('div');
+            messageContent.classList.add('message-body');
+            messageContent.innerText = text;
+            messageElement.appendChild(messageContent);
+            messagesContainer.appendChild(messageElement);
+            scrollToBottom(); // ここでスクロールを最下部に移動
+        }
+
+        // 自動応答を生成する関数
+        function getResponse(input) {
+            input = input.toLowerCase(); // 入力を小文字に変換
+            // ここに応答ロジックを追加
+            if (input.includes("予約")) {
+                return "ペットの予約は、アプリ内の予約ページから行うことができます。";
+            } else if (input.includes("キャンセルポリシー")) {
+                return "予約のキャンセルは、予約日の24時間前まで無料で行うことができます。";
+            } else if (input.includes("会員登録")) {
+                return "会員登録は無料で、アプリのトップページから行うことができます。";
+            } else if (input.includes("栄養管理")) {
+                return "栄養管理ページでは、ペットの健康状態に合わせた食事の提案があります。また、症状別にユーザー同士で情報交換もできます。";
+            } else if (input.includes("里親")) {
+                return "里親探しページでは、里親を必要としているペットの情報を掲載しています。気になるペットがいれば、直接連絡してみましょう。";
+            } else if (input.includes("マイページ")) {
+                return "マイページでは、あなたのペットの情報管理や、過去に交流したユーザーとのチャット履歴を確認できます。";
+            } else if (input.includes("ブログ")) {
+                return "ブログページでは、ペットの健康や育て方に関する記事を読むことができます。新しい発見があるかもしれません。";
+            } else if (input.includes("チャット")) {
+                return "チャット機能を利用して、他のユーザーと直接メッセージを交換できます。ペットのことで気になることがあれば、経験者に聞いてみましょう。";
+            } else {
+                return "ご質問ありがとうございます。カスタマーサポートにお問い合わせください。";
+            }
+        }
+
+        function sendMessage() {
+            const userInput = chatInput.value.trim();
+            if (userInput) {
+                displayMessage(userInput, 'sent');
+                setTimeout(() => {
+                    const response = getResponse(userInput);
+                    displayMessage(response, 'received');
+                    saveMessages();
+                }, 500);
+                chatInput.value = ''; // 入力フィールドをクリア
+            }
+        }
+        
+        function saveMessages() {
+            localStorage.setItem(chatKey, messagesContainer.innerHTML);
+        }
+
+
+
+        window.onload = () => {
+            loadMessages();
+            displayInitialMessage(); // ページ読み込み時に毎回初期メッセージを表示
+        };
+
+        function loadMessages() {
+            const savedMessages = localStorage.getItem('chatMessages');
+            if (savedMessages) {
+                messagesContainer.innerHTML = savedMessages;
+            }
+            scrollToBottom(); // メッセージを読み込んだ後に最下部へスクロール
+        }
+
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function displayInitialMessage() {
+            // 初期メッセージを表示する関数
+            displayMessage("お困りのことはありますか？", "received");
+            saveMessages(); // 初期メッセージも保存
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { // window.onloadの代わりにこれを使用
+            loadMessages();
+            displayInitialMessage();
+        });
+
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

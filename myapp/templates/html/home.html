@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <!-- ナビゲーションメニュー -->
+    {% comment %} <nav class="main-navigation"> {% endcomment %}
+    <div class="navbar">
+        <a href="{% url 'my_page' %}" class="nav-link"><i class="fa fa-home"></i> マイページ</a>
+        <a href="{% url 'blog' %}" class="nav-link"><i class="fa fa-pen"></i> ブログ</a>
+        <a href="{% url 'chat' %}" class="nav-link"><i class="fa fa-comments"></i> チャット</a>
+        <a href="{% url 'adoption' %}" class="nav-link"><i class="fa fa-heart"></i> 里親</a>
+        <a href="{% url 'nutrition' %}" class="nav-link"><i class="fa fa-apple-alt"></i> 栄養管理</a>
+    </nav>
+
+</body>
+</html>
+

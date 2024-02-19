@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<div class="my-page-container">
+    <!-- ボタン群 -->
+    <div class="my-page-buttons">
+        <a href="{% url 'owner_info' %}" class="my-page-button">飼い主情報登録</a>
+        <a href="{% url 'pet_info' %}" class="my-page-button">ペット情報登録</a>
+    </div>
+
+    <!-- 情報セクション -->
+    <div class="info-sections">
+        <!-- 飼い主情報セクション -->
+        <div class="info-block owner-info">
+            <div class="info-header">
+                <h2>飼い主情報</h2>
+            </div>
+            {% if owner_info %}
+                <div class="info-content">
+                    {% if owner_info.icon %}
+                        <img src="{{ owner_info.icon.url }}" alt="ユーザーアイコン" class="info-image">
+                    {% else %}
+                        <p>アイコンが設定されていません</p>
+                    {% endif %}
+                    <div class="info-text">
+                        <p>名前: {{ owner_info.name }}</p>
+                        <p>居住地: {{ owner_info.location }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p class="no-info-text">飼い主情報が登録されていません。</p>
+            {% endif %}
+        </div>
+
+        <!-- ペット情報セクション -->
+        <div class="info-block pet-info">
+            <div class="info-header">
+                <h2>ペット情報</h2>
+            </div>
+            {% if pet_info %}
+                <div class="info-content">
+                    {% if pet_info.icon %}
+                        <img src="{{ pet_info.icon.url }}" alt="ペットアイコン" class="info-image">
+                    {% else %}
+                        <p>アイコンが設定されていません</p>
+                    {% endif %}
+                    <div class="info-text">
+                        <p>ペット名: {{ pet_info.name }}</p>
+                        <p>種類: {{ pet_info.species }}</p>
+                        <p>品種: {{ pet_info.breed }}</p>
+                        <p>性別: {{ pet_info.get_gender_display }}</p>
+                        <p>生年月日: {{ pet_info.birthdate }}</p>
+                        <p>ワクチン接種有無: {{ pet_info.get_vaccination_display }}</p>
+                        <p>不妊去勢手術有無: {{ pet_info.get_neutered_display }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p class="no-info-text">ペット情報が登録されていません。</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="home-button-container">
+    <a href="{% url 'home' %}" class="home-button">ホーム</a>
+</div>
+
+</body>
+</html>

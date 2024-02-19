@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>里親探し</title>
+</head>
+<body>
+    <div class="adoption-container">
+        <div class="adoption-buttons">
+            <a href="{% url 'new_adoption' %}">新着情報</a>
+        </div>
+
+        <div class="adoption-post-button">
+            <a href="{% url 'post_adoption' %}" class="button">里親募集を投稿する</a>
+        </div>
+
+        <div class="home-button-container">
+            <a href="{% url 'home' %}" class="button home-button">ホーム</a>
+        </div>
+    </div>
+</body>
+</html>

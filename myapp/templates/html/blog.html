@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<!-- その他のボタンコンテナ -->
+<div class="blog-container">
+    <a href="{% url 'new_post' %}" class="blog-button">新規投稿</a>
+    <a href="{% url 'blog_posts' %}" class="blog-button">ブログ記事一覧</a>
+</div>
+
+<div class="home-button-container">
+    <a href="{% url 'home' %}" class="button home-button">ホーム</a>
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,39 @@
+<!-- nutrition.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>栄養管理</title>
+</head>
+<body>
+    <div class="container">
+        <div class="top-section">
+        <section>
+            <div class="search-container">
+            <form action="{% url 'nutrition_symptoms' %}" method="get">
+                <select name="symptom">
+                    <option value="皮膚">皮膚</option>
+                    <option value="消化">消化</option>
+                    <option value="関節">関節</option>
+                    <option value="目と耳">目と耳</option>
+                    <option value="毛並み">毛並み</option>
+                    <!-- その他症状をここに追加 -->
+                </select>
+                <button type="submit" class="button">検索</button>
+            </form>
+            </div>
+        </section>
+
+        <div class="button-container">
+            <a href="{% url 'nutrition_post' %}" class="button">栄養情報を投稿する</a>
+        </div>
+
+        <div class="home-button-container">
+            <a href="{% url 'home' %}" class="button home-button">ホーム</a>
+        </div>
+    </div>
+</body>
+</html>

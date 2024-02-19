@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>チャット</title>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-section-container">
+            <h1>チャットルーム</h1>
+            <div class="chat-section">
+                <!-- Chat room list -->
+                {% for room in chat_rooms %}
+                    <a href="{% url 'chat_room' room.id %}" class="chat-room">{{ room.name }}</a>
+                {% endfor %}
+                <a href="{% url 'new_chat_room' %}" class="new-chat-room">新規チャットルーム作成</a>
+            </div>
+            
+        <div class="home-button-container">
+            <a href="{% url 'home' %}" class="button home-button">ホーム</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
