@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     # ... other patterns ...
@@ -9,6 +10,7 @@ urlpatterns = [
     path('registration/', views.registration, name='registration'),
     path('new_registration/', views.new_registration, name='new_registration'),
     path('login/', views.login, name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', views.home, name='home'),
     path('mypage/', views.my_page, name='mypage'),  
     path('blog/', views.blog, name='blog'),           

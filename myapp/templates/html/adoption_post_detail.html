@@ -17,6 +17,7 @@
     <p>不妊去勢手術有無: {{ post.neutered|yesno:"有,無" }}</p>
     <p>住所: {{ post.address }}</p>
     <p>募集理由: {{ post.reason }}</p>
+    <p>問い合わせ先: {{ post.contact_info }}</p>
     {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="{{ post.pet_name }}" style="width: 200px;">
     {% endif %}

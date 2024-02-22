@@ -96,6 +96,28 @@ h2 {
     }
 }
 
+/* エラーメッセージのスタイルを赤色に変更 */
+.errorlist {
+    color: red;
+}
+
+.help-text {
+    color: red;  /* 赤色を適用 */
+    font-size: smaller; /* 好みに応じてフォントサイズを調整 */
+}
+
+/* フォームフィールドごとのエラーメッセージ */
+.errorlist li {
+    color: red;
+}
+
+/* エラーがあるフォームフィールドの枠線の色を赤に変更 */
+.error input, 
+.error select, 
+.error textarea {
+    border-color: red;
+}
+
 /* マイページコンテナ */
 .my-page-container {
     text-decoration: none;

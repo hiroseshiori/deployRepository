@@ -14,9 +14,23 @@
         <!-- 新規登録フォームの内容 -->
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <span class="help-text">{{ field.help_text }}</span>
+                    {% endif %}
+                </p>
+            {% endfor %}
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
             <button type="submit" class="button new-registration-button">新規登録</button>
         </form>
     </div>
+
 </body>
 </html>

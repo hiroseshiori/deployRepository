@@ -21,6 +21,20 @@
 
 </body>
 
+<!-- ペット情報HTMLの適切な場所に追加 -->
+<script src="{% static 'path/to/datepicker.js' %}"></script>
+<link rel="stylesheet" href="{% static 'path/to/datepicker.css' %}">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // DatePickerの初期化
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'  // 日付のフォーマットを指定
+    });
+});
+</script>
+
+
 <div class="mypage-container">
     <a href="{% url 'mypage' %}" class="button mypage-button">戻る</a>
 </div>

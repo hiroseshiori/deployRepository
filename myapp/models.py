@@ -90,6 +90,8 @@ class AdoptionPost(models.Model):
     address = models.CharField(max_length=255)  # 追加
     reason = models.TextField()  # 追加
     created_at = models.DateTimeField(auto_now_add=True)
+    contact_info = models.TextField(verbose_name='問い合わせ先')  # 問い合わせ先のフィールドを追加
+
 
     def __str__(self):
         return self.pet_type

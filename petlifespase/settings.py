@@ -148,6 +148,8 @@ WEBPACK_LOADER = {
     }
 }
 
+LOGOUT_REDIRECT_URL = '/'
+
 
 
 

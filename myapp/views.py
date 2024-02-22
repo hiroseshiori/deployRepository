@@ -31,9 +31,7 @@ from django.contrib import messages
 from .models import NutritionPost
 from .forms import NutritionPostForm
 from .models import NutritionPost, SYMPTOM_CHOICES
-
-
-
+from .forms import CustomUserCreationForm
 
 def registration(request):
     # Your new registration view logic goes here
@@ -41,7 +39,7 @@ def registration(request):
 
 def new_registration(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
@@ -253,11 +251,12 @@ def post_adoption_submit(request):
         neutered = request.POST.get('neutering') == 'Yes'
         address = request.POST.get('address')
         reason = request.POST.get('adoption_reason')
+        contact_info = request.POST.get('adoption_contact_info')
         photo = request.FILES.get('pet_photo')
 
         AdoptionPost.objects.create(
             pet_type=pet_type, pet_breed=pet_breed, gender=gender, birth_date=birth_date,
-            vaccinated=vaccinated, neutered=neutered, address=address, reason=reason, photo=photo
+            vaccinated=vaccinated, neutered=neutered, address=address, reason=reason, contact_info=contact_info, photo=photo
         )
 
         return redirect('new_adoption')
