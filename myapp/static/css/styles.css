@@ -39,7 +39,14 @@ body {
 }
 
 /* 新規登録ボタンスタイル */
-.new-registration-button, .home-button {
+.register-button, .home-button {
+    background-color: #ffffff; /* サーモン色 */
+    color: #000000; 
+    border-radius: 90px; /* 角を丸く */
+    text-align: center;
+}
+
+.register-button{
     background-color: #ffffff; /* サーモン色 */
     color: #000000; 
     border-radius: 90px; /* 角を丸く */
@@ -96,26 +103,12 @@ h2 {
     }
 }
 
-/* エラーメッセージのスタイルを赤色に変更 */
 .errorlist {
     color: red;
+    list-style: none;
 }
-
 .help-text {
-    color: red;  /* 赤色を適用 */
-    font-size: smaller; /* 好みに応じてフォントサイズを調整 */
-}
-
-/* フォームフィールドごとのエラーメッセージ */
-.errorlist li {
-    color: red;
-}
-
-/* エラーがあるフォームフィールドの枠線の色を赤に変更 */
-.error input, 
-.error select, 
-.error textarea {
-    border-color: red;
+    font-size: smaller;
 }
 
 /* マイページコンテナ */
@@ -795,4 +788,12 @@ h1 {
 .home-button-container {
     width: -30%;
     text-align: center; /* ホームボタンを中央に配置 */
+}
+
+/* styles.css */
+.posts-grid p {
+    text-align: center; /* テキストを中央揃え */
+    width: 430%; /* 要素の幅を最大に設定 */
+    margin: 0 auto; /* 上下のマージンを0にし、左右のマージンを自動調整 */
+    font-size: 24px;
 }

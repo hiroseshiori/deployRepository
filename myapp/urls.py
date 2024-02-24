@@ -8,7 +8,7 @@ urlpatterns = [
     # ... other patterns ...
     path('', views.registration, name='registration'),
     path('registration/', views.registration, name='registration'),
-    path('new_registration/', views.new_registration, name='new_registration'),
+    path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', views.home, name='home'),

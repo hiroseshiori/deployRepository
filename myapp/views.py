@@ -31,23 +31,22 @@ from django.contrib import messages
 from .models import NutritionPost
 from .forms import NutritionPostForm
 from .models import NutritionPost, SYMPTOM_CHOICES
-from .forms import CustomUserCreationForm
+from .forms import SignUpForm
 
 def registration(request):
     # Your new registration view logic goes here
     return render(request, 'html/registration.html')  # Replace with the actual template name
 
-def new_registration(request):
+def register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            return redirect('home')  # Change 'home' to the name of your home URL
+            form.save()
+            # 新規登録処理後のリダイレクト先を指定
+            return redirect('home') # 例: ログインページへリダイレクト
     else:
-        form = UserCreationForm()
-
-    return render(request, 'html/new_registration.html', {'form': form})
+        form = SignUpForm()
+    return render(request, 'html/register.html', {'form': form})
 
 def login(request):
     if request.method == 'POST':
@@ -228,6 +227,15 @@ def new_adoption(request):
     paginator = Paginator(posts_list, 4)  # 1ページあたり4つの投稿を表示する設定
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
+    is_empty = not page_obj.object_list
+
+    context = {
+        'page_obj': page_obj,
+        'is_empty': is_empty,
+        'query': query
+    }
+    
 
     return render(request, 'html/new_adoption.html', {'page_obj': page_obj})
 

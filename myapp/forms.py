@@ -12,26 +12,29 @@ from django.core.exceptions import ValidationError
 import re
 
 
-class CustomUserCreationForm(UserCreationForm):
+class SignUpForm(UserCreationForm):
     username = forms.CharField(
         label='ユーザー名',
         max_length=150,
-        help_text='半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。',
-        error_messages={
-            'invalid': "半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。",
-            'required': "ユーザー名は必須です。",
-            'max_length': "ユーザー名は150文字以下にしてください。",
-        }
+        required=True,
+        help_text='150文字以下のユーザー名を入力してください。'
+    )
+    password1 = forms.CharField(
+        label='パスワード',
+        widget=forms.PasswordInput,
+        required=True,
+        help_text='安全なパスワードを入力してください。'
+    )
+    password2 = forms.CharField(
+        label='確認用パスワード',
+        widget=forms.PasswordInput,
+        required=True,
+        help_text='同じパスワードを再度入力してください。'
     )
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username', '')  # usernameがNoneの場合は空文字を返す
-        pattern = r'^[\w@\.\+\-/_]+$'
-        if not re.fullmatch(pattern, username):
-            raise forms.ValidationError(
-                "半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。"
-            )
-        return username
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2',)
 
 class OwnerInfoForm(forms.Form):
     name = forms.CharField(label='名前', max_length=100, required=True)
