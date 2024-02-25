@@ -3,9 +3,11 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
+from django.contrib import admin
+from django.urls import path, include 
+
 
 urlpatterns = [
-    # ... other patterns ...
     path('', views.registration, name='registration'),
     path('registration/', views.registration, name='registration'),
     path('register/', views.register, name='register'),

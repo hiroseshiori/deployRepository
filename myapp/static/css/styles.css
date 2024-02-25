@@ -639,12 +639,15 @@ h1 {
     margin: 20px;
 }
 
+/* .post自体のスタイル */
 .post {
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
+    border: 1px solid #ffeeee;
+    padding: 20px; /* パディングを適切な大きさに調整 */
+    background-color: #ffffff;
     border-radius: 5px;
-    overflow: hidden;
+    margin-bottom: 20px; /* 各投稿の間にマージンを追加 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 影をつけて立体感を出す */
+    /* 他のスタイル... */
 }
 
 .post-image {
@@ -652,6 +655,24 @@ h1 {
     height: auto;
     border-radius: 5px; /* 画像の角を丸くする */
 }
+
+/* 投稿内容が入るボックスのスタイルを調整 */
+.post p {
+    text-align: left; /* テキストを左揃えに */
+    width: auto; /* 幅を自動調整に */
+    margin: 0; /* マージンを0に */
+    font-size: 16px; /* フォントサイズを適切な大きさに調整 */
+}
+
+/* センタリング用のテキストスタイル */
+.center-text {
+    text-align: center; /* テキストを中央揃えに */
+    width: 420%; /* 幅を100%に */
+    margin: 20px ; /* 上下にマージンを追加 */
+    display: block; /* ブロック要素として扱う */
+    font-size: 20px; /* フォントサイズを適切な大きさに調整 */
+}
+
 
 .details-link {
     display: block;
@@ -682,6 +703,13 @@ h1 {
       grid-template-columns: 1fr;
     }
   }
+
+  /* レスポンシブデザインのためのスタイル（必要に応じて） */
+  @media (max-width: 768px) {
+    .post p {
+        font-size: 14px; /* 小さい画面ではフォントサイズを小さく */
+    }
+  }
   
 /* 例: search-formクラスのスタイリング */
 .search-form {
@@ -689,10 +717,7 @@ h1 {
     /* その他のスタイル */
 }
 
-/* 星評価のスタイル */
-.rating {
-    direction: rtl; /* 右から左へ配置 */
-}
+
 
 .rating > input {
     display: none; /* ラジオボタンを非表示にする */
@@ -790,10 +815,3 @@ h1 {
     text-align: center; /* ホームボタンを中央に配置 */
 }
 
-/* styles.css */
-.posts-grid p {
-    text-align: center; /* テキストを中央揃え */
-    width: 430%; /* 要素の幅を最大に設定 */
-    margin: 0 auto; /* 上下のマージンを0にし、左右のマージンを自動調整 */
-    font-size: 24px;
-}

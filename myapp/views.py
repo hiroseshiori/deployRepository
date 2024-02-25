@@ -32,6 +32,7 @@ from .models import NutritionPost
 from .forms import NutritionPostForm
 from .models import NutritionPost, SYMPTOM_CHOICES
 from .forms import SignUpForm
+from django.contrib.auth import login as auth_login
 
 def registration(request):
     # Your new registration view logic goes here
@@ -41,9 +42,9 @@ def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            # 新規登録処理後のリダイレクト先を指定
-            return redirect('home') # 例: ログインページへリダイレクト
+            user = form.save()
+            auth_login(request, user)  # ユーザーをログイン状態にする
+            return redirect('home')  # ホームページへリダイレクト
     else:
         form = SignUpForm()
     return render(request, 'html/register.html', {'form': form})
@@ -226,7 +227,11 @@ def new_adoption(request):
 
     paginator = Paginator(posts_list, 4)  # 1ページあたり4つの投稿を表示する設定
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)  # コメントアウトを解除してpage_objを定義
+    
+    for post in page_obj.object_list:
+        print(post.pet_type, post.pet_breed, post.gender, post.birth_date, post.vaccinated, post.neutered, post.address, post.reason, post.contact_info)
+
     
     is_empty = not page_obj.object_list
 
@@ -235,9 +240,8 @@ def new_adoption(request):
         'is_empty': is_empty,
         'query': query
     }
-    
 
-    return render(request, 'html/new_adoption.html', {'page_obj': page_obj})
+    return render(request, 'html/new_adoption.html', context)  # context変数を使用してテンプレートをレンダリング
 
 # 里親募集投稿ページを表示するビュー
 def post_adoption(request):
@@ -304,9 +308,10 @@ def nutrition_post_submit(request):
         if form.is_valid():
             nutrition_post = form.save(commit=False)
             nutrition_post.user = request.user
+            nutrition_post.rating = form.cleaned_data.get('rating')
             nutrition_post.save()
             messages.success(request, '栄養管理情報を投稿しました。')
-            return redirect('nutrition')
+            return redirect('nutrition') 
         else:
             messages.error(request, '投稿に失敗しました。入力内容を確認してください。')
     else:

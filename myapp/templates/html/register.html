@@ -9,11 +9,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h2>PetLifeSpase 新規登録</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="button register-button">登録</button>
-    </form>
+    <div class="form-container register-form">
+        <h2>PetLifeSpase 新規登録</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button register-button">登録</button>
+        </form>
+
+        <div class="link-to-login">
+            <a href="{% url 'login' %}">ログイン画面はこちら</a>
+        </div>
+        
+    </div>    
 </body>
 </html>
