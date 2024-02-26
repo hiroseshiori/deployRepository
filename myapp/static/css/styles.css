@@ -27,7 +27,7 @@ body {
 
 /* .buttonクラスにマウスホバーした時のスタイル */
 .button:hover {
-    color: #ff7ade; /* ダークピンク色 */
+    color: #ff8de6; /* ダークピンク色 */
 }
 
 .registration-container {
@@ -40,14 +40,14 @@ body {
 
 /* 新規登録ボタンスタイル */
 .register-button, .home-button {
-    background-color: #ffffff; /* サーモン色 */
+    background-color: #ffffff; 
     color: #000000; 
     border-radius: 90px; /* 角を丸く */
     text-align: center;
 }
 
-.register-button{
-    background-color: #ffffff; /* サーモン色 */
+.register-button {
+    background-color: #ffffff; 
     color: #000000; 
     border-radius: 90px; /* 角を丸く */
     text-align: center;
@@ -92,7 +92,7 @@ h2 {
 }
 
 .navbar a:hover {
-    color: #ff7ade; /* ホバー時の文字色を変更 */
+    color: #333; /* ホバー時の文字色を変更 */
 }
 
 /* メディアクエリで小さな画面に対応 */
@@ -263,13 +263,29 @@ h2 {
     color: #ff7ade; /* ホバー時のボーダーカラーもダークサーモン色に */
 }
 
-/* ホームボタンコンテナのスタイル */
+/* ホームボタンコンテナのスタイル変更 */
 .home-button-container {
-    position: fixed; /* 位置を固定 */
-    left: 0; /* 右端に */
-    top: 50%; /* 画面の上から50%の位置に（垂直中央に近い位置） */
-    transform: translateY(-50%); /* Y軸方向に-50%移動して中央に調整 */
+    position: absolute; /* 固定位置から絶対位置へ変更 */
+    right: 50px; /* 右端からの距離 */
+    bottom: 20px; /* 下端からの距離 */
     z-index: 1000; /* 他の要素の上に表示 */
+}
+
+/* メディアクエリで小さな画面に対応 */
+@media (max-width: 768px) {
+    .home-button-container {
+        right: 10px; /* 右端からの距離を小さくする */
+        bottom: 10px; /* 下端からの距離を小さくする */
+    }
+}
+
+@media (max-width: 480px) {
+    .home-button-container {
+        position: fixed; /* 小さい画面では固定位置に */
+        right: 10px; /* さらに距離を調整 */
+        bottom: 10px;
+        width: auto; /* コンテナの幅を自動に設定 */
+    }
 }
 
 .post-image-container {
@@ -308,7 +324,7 @@ h2 {
 
 /* ホームボタンのスタイル */
 .home-button {
-    background-color: #b7b8bb; 
+    background-color: #ffffff; 
     color: #000000; /* 文字色は白 */
     border-radius: 25px; /* 角を丸く */
     padding: 0.8rem 2rem; /* パディングを設定 */
@@ -319,7 +335,7 @@ h2 {
 }
 
 .home-button:hover {
-    background-color: #b7b8bb; 
+    background-color: #ffffff; 
 }
 
 /* Ensure headings do not wrap */
@@ -402,8 +418,8 @@ h1 {
     padding: 10px;
     max-width: calc(100% - 20px); /* アイコン分を除いた幅にする */
     word-wrap: break-word;
-    border: 1px solid #5ad8fb;
-    background-color: #70a0fa; /* 軽い背景色を適用 */
+    border: 1px solid #ffe6fa;
+    background-color: #f9a8c6; /* 軽い背景色を適用 */
     margin-bottom: 10px; /* 下部の余白を追加 */
     overflow-wrap: break-word; /* Prevent overflow */
     word-wrap: break-word; /* 長い単語があっても折り返して表示されるようにする */
@@ -447,7 +463,7 @@ h1 {
 
 /* 送信したメッセージのスタイル */
 .sent .message-body {
-    background-color: #1d98fc; /* 送信者のメッセージの背景色を変更 */
+    background-color: #f9a8c6; /* 送信者のメッセージの背景色を変更 */
     align-self: flex-start; /* 右側に配置 */
     order: 1; /* 吹き出しを右側に */
     margin-left: auto;
@@ -477,7 +493,7 @@ h1 {
 
 /* 受信したメッセージのスタイル */
 .received .message-body {
-    background-color: #a1def5; /* 受信者のメッセージの背景色を変更 */
+    background-color: #ff86fb; /* 受信者のメッセージの背景色を変更 */
     align-self: flex-end; /* 左側に配置 */
     order: -1; /* 吹き出しを左側に */
     margin-right: auto;
@@ -584,18 +600,13 @@ h1 {
 }
 
 .chat-button {
-    background-color: #ff7ade; /* サーモン色 */
-    color: #fff; /* 文字色は白 */
+    color: #1a1a1a; /* 文字色は白 */
     border-radius: 25px; /* 角を丸く */
     padding: 0.8rem 2rem; /* パディングを設定 */
     margin: 0.5rem; /* 余白を設定 */
     display: block; /* ブロックレベル要素として表示 */
     text-decoration: none; /* テキストの下線を除去 */
     /* 必要に応じて他のスタイルを追加 */
-}
-
-.chat-button:hover {
-    background-color: #ec407a; /* ホバー時の色を濃いサーモン色に */
 }
 
 .chat-log {
@@ -814,4 +825,22 @@ h1 {
     width: -30%;
     text-align: center; /* ホームボタンを中央に配置 */
 }
+
+/* 登録ボタンのスタイル */
+button {
+    background-color: #ffc3f4; /* ボタンの背景色 */
+    color: rgb(73, 73, 73); /* ボタンのテキスト色 */
+    padding: 12px 24px; /* ボタン内のパディング */
+    border: none; /* ボーダーを非表示に */
+    border-radius: 4px; /* ボタンの角を丸くする */
+    cursor: pointer; /* カーソルを指の形に */
+    transition: background-color 0.3s; /* 背景色の変化を滑らかに */
+    font-size: 16px; /* フォントサイズ */
+    margin-top: 10px; /* フォームの下にマージンを追加 */
+  }
+  
+  button:hover {
+    background-color: #ffedfc; /* ホバー時に背景色を変更 */
+  }
+  
 
