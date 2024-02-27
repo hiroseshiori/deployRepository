@@ -260,15 +260,7 @@ h2 {
     color: #ff7ade; /* ホバー時のボーダーカラーもダークサーモン色に */
 }
 
-/* ホームボタンコンテナのスタイル変更 */
-.home-button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 20px auto;/
-}
+
 
 /* メディアクエリで小さな画面に対応 */
 @media (max-width: 768px) {
@@ -835,6 +827,7 @@ button {
     justify-content: center;
     width: 100%;
     margin: 20px auto;
+    text-align: center;
 }
 
 
