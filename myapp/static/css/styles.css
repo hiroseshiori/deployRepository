@@ -39,7 +39,7 @@ body {
 }
 
 /* 新規登録ボタンスタイル */
-.register-button, .home-button {
+.register-button {
     background-color: #ffffff; 
     color: #000000; 
     border-radius: 90px; /* 角を丸く */
@@ -73,7 +73,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -113,16 +112,14 @@ h2 {
 
 /* マイページコンテナ */
 .my-page-container {
-    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* 上部に寄せる */
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    left: 0; /* 右端に */
+    justify-content: center;
+    width: 100%;
+    margin: 20px auto;
 }
+
 
 /* マイページの登録ボタンのスタイル */
 .my-page-button {
@@ -220,7 +217,7 @@ h2 {
 }
 
 /* ブログページのボタンスタイル */
-.blog-button, .home-button, .new-post-button, .user-search-button {
+.blog-button,.new-post-button {
     text-decoration: none;
     color: #333;
     margin: 0.5rem 1rem; /* 適宜調整してください */
@@ -265,10 +262,12 @@ h2 {
 
 /* ホームボタンコンテナのスタイル変更 */
 .home-button-container {
-    position: absolute; /* 固定位置から絶対位置へ変更 */
-    right: 50px; /* 右端からの距離 */
-    bottom: 20px; /* 下端からの距離 */
-    z-index: 1000; /* 他の要素の上に表示 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 20px auto;/
 }
 
 /* メディアクエリで小さな画面に対応 */
@@ -322,21 +321,7 @@ h2 {
 }
 
 
-/* ホームボタンのスタイル */
-.home-button {
-    background-color: #ffffff; 
-    color: #000000; /* 文字色は白 */
-    border-radius: 25px; /* 角を丸く */
-    padding: 0.8rem 2rem; /* パディングを設定 */
-    margin: 0.5rem; /* 余白を設定 */
-    display: block; /* ブロックレベル要素として表示 */
-    text-decoration: none; /* テキストの下線を除去 */
-    /* 必要に応じて他のスタイルを追加 */
-}
 
-.home-button:hover {
-    background-color: #ffffff; 
-}
 
 /* Ensure headings do not wrap */
 h1 {
@@ -821,10 +806,7 @@ h1 {
     margin-bottom: 20px; /* 投稿ボタンとホームボタンの間にスペースを追加 */
 }
 
-.home-button-container {
-    width: -30%;
-    text-align: center; /* ホームボタンを中央に配置 */
-}
+
 
 /* 登録ボタンのスタイル */
 button {
@@ -837,10 +819,36 @@ button {
     transition: background-color 0.3s; /* 背景色の変化を滑らかに */
     font-size: 16px; /* フォントサイズ */
     margin-top: 10px; /* フォームの下にマージンを追加 */
-  }
+}  
+  
   
   button:hover {
     background-color: #ffedfc; /* ホバー時に背景色を変更 */
   }
-  
+
+
+ 
+  .home-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 20px auto;
+}
+
+
+/* ホームボタンのスタイル */
+.home-button {
+    text-decoration: none;
+    color: #333;
+    margin: 0.5rem 1rem; 
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem; /* ナビゲーションバーと同じフォントサイズに */
+    display: inline-block; 
+    cursor: pointer; /* カーソルを指に */
+   
+}
+
+
 
